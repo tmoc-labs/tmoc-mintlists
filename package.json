@@ -7,7 +7,7 @@
     "@orca-so/token-sdk": "^0.1.4"
   },
   "devDependencies": {
-    "@tmoc/mintlist-cli": "^0.0.1",
+    "@tmoc/mintlist-cli": "^0.0.2",
     "@types/jest": "^26.0.24",
     "jest": "^27.0.6",
     "prettier": "^2.3.2",
@@ -17,7 +17,7 @@
   },
   "scripts": {
     "clean": "rimraf dist ./src/tokenlists ./src/index.ts",
-    "generate": "mintlist gen-tokenlist ./src/mintlists/* --outDir ./src/tokenlists --overrides ./src/overrides.json",
+    "generate": "mintlist gen-tokenlist ./src/mintlists/* --outDir ./src/tokenlists --overrides ./src/overrides.json --useEnv",
     "prebuild": "mintlist gen-index",
     "build": "tsc",
     "add-mint": "mintlist add-mint",
