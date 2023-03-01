@@ -34,7 +34,7 @@ jobs:
       - name: Detect Version Changes
         id: detect_changes
         run: |
-          ${PWD}/bin/detect-changes.sh
+          bash ./bin/detect-changes.sh
       - name: Print output
         run: echo "Got outputs for bump_type=${{ steps.detect_changes.bump_type }}"
       # - name: Build
