@@ -37,8 +37,7 @@ changed_files=$(git diff --name-only --diff-filter=d HEAD~1 HEAD | grep "^src/mi
 # Loop through each mintlist file
 for file in $changed_files; do
   # Check if the file exists in both commits
-  should_test=$(git diff --name-only HEAD~1 HEAD | grep -q "$file")
-  if [ -n "$should_test" ]; then
+  if git diff --name-only HEAD~1 HEAD | grep -q "$file"; then
     # Compare the mints arrays in both versions of the file
     removed_mints=$(comm -13 \
       <(jq -r '.mints | sort[]' <(git show HEAD:"$file")) \
