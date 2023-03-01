@@ -1,0 +1,28 @@
+{
+  "name": "@tmoc/tmoc-mintlists",
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "dependencies": {
+    "@orca-so/token-sdk": "^0.1.4"
+  },
+  "devDependencies": {
+    "@tmoc/mintlist-cli": "^0.0.1",
+    "@types/jest": "^26.0.24",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
+    "eslint-config-prettier": "^8.3.0",
+    "jest": "^27.0.6",
+    "prettier": "^2.3.2",
+    "rimraf": "^4.1.2",
+    "ts-jest": "^27.0.3",
+    "typescript": "^4.5.5"
+  },
+  "scripts": {
+    "clean": "rimraf dist ./src/tokenlists ./src/index.ts",
+    "generate": "mintlist gen-tokenlist ./src/mintlists/* --outDir ./src/tokenlists --overrides ./src/overrides.json",
+    "postgenerate": "mintlist gen-index",
+    "prebuild": "yarn generate",
+    "build": "tsc"
+  }
+}

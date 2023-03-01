@@ -1,0 +1,37 @@
+name: Build
+
+"on":
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-tokenlist:
+    environment: mainnet
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install
+        run: |
+          yarn install
+      - name: Build
+        env:
+          SOLANA_NETWORK: ${{ secrets.SOLANA_NETWORK }}
+        run: |
+          yarn build
+      - name: Publish NPM
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_ACCESS_TOKEN }}
+          access: public
