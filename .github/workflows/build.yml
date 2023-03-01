@@ -33,7 +33,6 @@ jobs:
         uses: "mathieudutour/github-tag-action@v6.1"
         with:
           github_token: ${{ secrets.GH_ACCESS_TOKEN }}
-          dry_run: true
       # - name: Publish NPM
       #   uses: JS-DevTools/npm-publish@v1
       #   with:
