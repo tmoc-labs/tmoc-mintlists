@@ -10,10 +10,21 @@ for file in $(git diff --name-only --diff-filter=d HEAD~1 HEAD | grep "^src/mint
       <(jq -r '.mints | sort[]' <(git show HEAD~1:"$file"))
     )
 
+    added_mints=$(comm -13 \
+      <(jq -r '.mints | sort[]' <(git show HEAD~1:"$file")) \
+      <(jq -r '.mints | sort[]' <(git show HEAD:"$file"))
+    )
+
     # Output any removed mints
     if [ -n "$removed_mints" ]; then
       echo "Mints removed from $file:"
       echo "$removed_mints"
+      echo
+    fi
+
+    if [ -n "$added_mints" ]; then
+      echo "Mints removed from $file:"
+      echo "$added_mints"
       echo
     fi
   fi

@@ -1,4 +1,7 @@
 {
   "name": "TMOC Default List",
-  "mints": ["orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE"]
+  "mints": [
+    "orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE",
+    "NFTUkR4u7wKxy9QLaX2TGvd9oZSWoMo4jqSJqdMb7Nk"
+  ]
 }
