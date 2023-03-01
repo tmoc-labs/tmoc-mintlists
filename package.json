@@ -22,7 +22,9 @@
     "clean": "rimraf dist ./src/tokenlists ./src/index.ts",
     "generate": "mintlist gen-tokenlist ./src/mintlists/* --outDir ./src/tokenlists --overrides ./src/overrides.json",
     "postgenerate": "mintlist gen-index",
-    "prebuild": "yarn generate",
-    "build": "tsc"
+    "prebuild": "yarn clean && yarn generate",
+    "build": "tsc",
+    "add-mint": "mintlist add-mint",
+    "rm-mint": "mintlist rm-mint"
   }
 }
