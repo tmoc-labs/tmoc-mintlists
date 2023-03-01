@@ -32,8 +32,11 @@ jobs:
         run: |
           yarn install
       - name: Detect Version Changes
+        id: detect_changes
         run: |
           ./bin/detect-changes.sh
+      - name: Print output
+        run: echo "Got outputs for bump_type=${{ steps.detect_changes.bump_type }}"
       # - name: Build
       #   env:
       #     SOLANA_NETWORK: ${{ secrets.SOLANA_NETWORK }}

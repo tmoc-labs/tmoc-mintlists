@@ -69,11 +69,11 @@ for file in $changed_files; do
 done
 
 if [ "$major_change" = true ]; then
-  echo "::set-output name=bump_type::major"
+  echo "::bump_type=major" >> $GITHUB_OUTPUT
 elif [ "$minor_change" = true ]; then
-  echo "::set-output name=bump_type::minor"
+  echo "::bump_type=minor" >> $GITHUB_OUTPUT
 elif [ "$patch_change" = true ]; then
-  echo "::set-output name=bump_type::patch"
+  echo "::bump_type=patch" >> $GITHUB_OUTPUT
 else
-  echo "::set-output name=bump_type::none"
+  echo "::bump_type=none" >> $GITHUB_OUTPUT
 fi
