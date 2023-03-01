@@ -1218,10 +1218,10 @@
   resolved "https://registry.yarnpkg.com/@supercharge/promise-pool/-/promise-pool-2.4.0.tgz#6050eea8c2d7f92ddd4ddc582ee328b15c034ad3"
   integrity sha512-O9CMipBlq5OObdt1uKJGIzm9cdjpPWfj+a+Zw9EgWKxaMNHKC7EU7X9taj3H0EGQNLOSq2jAcOa3EzxlfHsD6w==
 
-"@tmoc/mintlist-cli@~0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@tmoc/mintlist-cli/-/mintlist-cli-0.0.3.tgz#da630f02f6559a1a4e391ad8d2acfa09c3b15a32"
-  integrity sha512-9b8rNknHcyumJKV0h2ITBE+OKdm+2pZSZK2vhNsHtUAYfQqammCtuJLR4TX2Fij6lBTwNVsWs+Ypqs+9H6g9tw==
+"@tmoc/mintlist-cli@~0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@tmoc/mintlist-cli/-/mintlist-cli-0.0.9.tgz#52e862bebdd13683c06f96e2399ebc295493bbbd"
+  integrity sha512-OOcWy2yYjKGKOhKt1Dy+raPEie67sipzpZ3cnnDEiCcNhQ6+11mAtkcmDdKi49Cg/RGx1BnIkQoUNCj7PhTNSQ==
   dependencies:
     "@orca-so/token-sdk" "^0.1.4"
     "@solana/web3.js" "^1.73.3"

@@ -7,7 +7,7 @@
     "@orca-so/token-sdk": "^0.1.4"
   },
   "devDependencies": {
-    "@tmoc/mintlist-cli": "~0.0.3",
+    "@tmoc/mintlist-cli": "~0.0.9",
     "@types/jest": "^26.0.24",
     "jest": "^27.0.6",
     "prettier": "^2.3.2",
