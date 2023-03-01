@@ -29,10 +29,12 @@ jobs:
           SOLANA_NETWORK: ${{ secrets.SOLANA_NETWORK }}
         run: |
           yarn generate && yarn build
-      - name: "Bump version and push tag"
-        uses: "mathieudutour/github-tag-action@v6.1"
+      - name: "Automated Version Bump"
+        uses: "phips28/gh-action-bump-version@v9.1.0"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
         with:
-          github_token: ${{ secrets.GH_ACCESS_TOKEN }}
+          version-type: "patch"
       # - name: Publish NPM
       #   uses: JS-DevTools/npm-publish@v1
       #   with:
