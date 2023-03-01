@@ -31,7 +31,7 @@ jobs:
         run: |
           yarn generate && yarn build
       - name: "Automated Version Bump"
-        uses: "phips28/gh-action-bump-version@9.1.0"
+        uses: "phips28/gh-action-bump-version@v9.1.0"
         env:
           GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
         with:
