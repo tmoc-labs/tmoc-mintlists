@@ -21,8 +21,7 @@
   "scripts": {
     "clean": "rimraf dist ./src/tokenlists ./src/index.ts",
     "generate": "mintlist gen-tokenlist ./src/mintlists/* --outDir ./src/tokenlists --overrides ./src/overrides.json",
-    "postgenerate": "mintlist gen-index",
-    "prebuild": "yarn clean && yarn generate",
+    "prebuild": "mintlist gen-index",
     "build": "tsc",
     "add-mint": "mintlist add-mint",
     "rm-mint": "mintlist rm-mint"
