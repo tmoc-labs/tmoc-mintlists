@@ -1,7 +1,41 @@
 #!/bin/bash
 
+major_change=false
+minor_change=false
+patch_change=false
+
+# Define the directories to check
+previous_dir="HEAD^"
+current_dir="HEAD"
+mintlists_dir="src/mintlists/"
+
+# Get the list of mintlist files in the previous commit
+previous_mintlists=$(git ls-tree --name-only $previous_dir $mintlists_dir)
+
+# Get the list of mintlist files in the current commit
+current_mintlists=$(git ls-tree --name-only $current_dir $mintlists_dir)
+
+# Check for added mintlists
+for mintlist in $current_mintlists; do
+  if ! echo "$previous_mintlists" | grep -q "^$mintlist$"; then
+    echo "$mintlist has been added"
+    major_change=true
+  fi
+done
+
+# Check for removed mintlists
+for mintlist in $previous_mintlists; do
+  if ! echo "$current_mintlists" | grep -q "^$mintlist$"; then
+    echo "$mintlist has been removed"
+    major_change=true
+  fi
+done
+
+# Files that have been changed
+changed_files=$(git diff --name-only --diff-filter=d HEAD~1 HEAD | grep "^src/mintlists/.*\.mintlist\.json$")
+
 # Loop through each mintlist file
-for file in $(git diff --name-only --diff-filter=d HEAD~1 HEAD | grep "^src/mintlists/.*\.mintlist\.json$"); do
+for file in $changed_files; do
   # Check if the file exists in both commits
   if git diff --name-only HEAD~1 HEAD | grep -q "$file"; then
     # Compare the mints arrays in both versions of the file
@@ -20,12 +54,18 @@ for file in $(git diff --name-only --diff-filter=d HEAD~1 HEAD | grep "^src/mint
       echo "Mints removed from $file:"
       echo "$removed_mints"
       echo
+      minor_change=true
     fi
 
     if [ -n "$added_mints" ]; then
-      echo "Mints removed from $file:"
+      echo "Mints added to $file:"
       echo "$added_mints"
       echo
+      patch_change=true
     fi
   fi
 done
+
+echo "major_change=$major_change"
+echo "minor_change=$minor_change"
+echo "patch_change=$patch_change"
