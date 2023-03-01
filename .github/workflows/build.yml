@@ -1,4 +1,4 @@
-name: Build and Publish
+name: Bump & Publish
 
 "on":
   push:
@@ -7,7 +7,7 @@ name: Build and Publish
   workflow_dispatch:
 
 jobs:
-  build-and-publish:
+  bump-and-publish:
     environment: mainnet
     runs-on: ubuntu-latest
     permissions:
@@ -17,6 +17,13 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 2
+      - name: "Automated Version Bump"
+        uses: "phips28/gh-action-bump-version@v9.1.0"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          version-type: "patch"
+          tag-prefix: "v"
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -29,14 +36,8 @@ jobs:
           SOLANA_NETWORK: ${{ secrets.SOLANA_NETWORK }}
         run: |
           yarn generate && yarn build
-      - name: "Automated Version Bump"
-        uses: "phips28/gh-action-bump-version@v9.1.0"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+      - name: Publish NPM
+        uses: JS-DevTools/npm-publish@v1
         with:
-          version-type: "patch"
-      # - name: Publish NPM
-      #   uses: JS-DevTools/npm-publish@v1
-      #   with:
-      #     token: ${{ secrets.NPM_ACCESS_TOKEN }}
-      #     access: public
+          token: ${{ secrets.NPM_ACCESS_TOKEN }}
+          access: public
