@@ -1,4 +1,4 @@
-name: Build
+name: Build and Publish
 
 "on":
   push:
@@ -7,7 +7,7 @@ name: Build
   workflow_dispatch:
 
 jobs:
-  build-tokenlist:
+  build-and-publish:
     environment: mainnet
     runs-on: ubuntu-latest
     permissions:
@@ -29,9 +29,15 @@ jobs:
         env:
           SOLANA_NETWORK: ${{ secrets.SOLANA_NETWORK }}
         run: |
-          yarn build
-      - name: Publish NPM
-        uses: JS-DevTools/npm-publish@v1
+          yarn generate && yarn build
+      - name: "Automated Version Bump"
+        uses: "phips28/gh-action-bump-version@9.1.0"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
         with:
-          token: ${{ secrets.NPM_ACCESS_TOKEN }}
-          access: public
+          version-type: "patch"
+      # - name: Publish NPM
+      #   uses: JS-DevTools/npm-publish@v1
+      #   with:
+      #     token: ${{ secrets.NPM_ACCESS_TOKEN }}
+      #     access: public
