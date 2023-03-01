@@ -11,8 +11,7 @@ jobs:
     environment: mainnet
     runs-on: ubuntu-latest
     permissions:
-      id-token: write
-      contents: read
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -36,8 +35,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
         with:
           version-type: "patch"
-      # - name: Publish NPM
-      #   uses: JS-DevTools/npm-publish@v1
-      #   with:
-      #     token: ${{ secrets.NPM_ACCESS_TOKEN }}
-      #     access: public
+      - name: Publish NPM
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_ACCESS_TOKEN }}
+          access: public
