@@ -17,16 +17,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 2
-      # - name: 'Automated Version Bump'
-      #   uses: 'phips28/gh-action-bump-version@v9.1.0'
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     version-type: 'patch'
-      #     tag-prefix: 'v'
-      - name: List contents
-        run: |
-          ls -al
+      - uses: fregante/setup-git-user@v1
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -45,8 +36,6 @@ jobs:
         run: |
           npm config set commit-hooks=false
           npm version ${{ steps.detect_changes.outputs.bump_type }}
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git push origin HEAD:${{ github.ref }}
       # - name: Build
       #   env:
