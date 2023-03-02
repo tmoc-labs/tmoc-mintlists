@@ -14,7 +14,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 2
       - name: Setup Node
@@ -29,6 +29,7 @@ jobs:
         run: |
           bash ./bin/detect-changes
       - name: Setup Git User
+        if: ${{ steps.detect_changes.outputs.bump_type != 'none' }}
         uses: fregante/setup-git-user@v1
       - name: Bump Version
         if: ${{ steps.detect_changes.outputs.bump_type != 'none' }}

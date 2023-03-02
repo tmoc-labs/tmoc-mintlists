@@ -22,5 +22,8 @@
     "build": "tsc",
     "add-mint": "mintlist add-mint",
     "rm-mint": "mintlist rm-mint"
-  }
+  },
+  "files": [
+    "/dist"
+  ]
 }
