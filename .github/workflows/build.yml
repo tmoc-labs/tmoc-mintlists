@@ -24,6 +24,9 @@ jobs:
       #   with:
       #     version-type: "patch"
       #     tag-prefix: "v"
+      - name: List contents
+        run: |
+          ls -al
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
