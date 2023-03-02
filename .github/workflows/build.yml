@@ -40,6 +40,11 @@ jobs:
           bash ./bin/detect-changes
       - name: Print output
         run: echo "Got outputs for bump_type=${{ steps.detect_changes.outputs.bump_type }}"
+      - name: Bump Version
+        if: ${{ steps.detect_changes.outputs.bump_type != "none" }}
+        run: |
+          npm config set commit-hooks=false
+          npm version ${{ steps.detect_changes.outputs.bump_type }}
       # - name: Build
       #   env:
       #     SOLANA_NETWORK: ${{ secrets.SOLANA_NETWORK }}
