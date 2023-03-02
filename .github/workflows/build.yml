@@ -36,7 +36,7 @@ jobs:
         run: |
           npm config set commit-hooks=false
           npm version ${{ steps.detect_changes.outputs.bump_type }}
-          git push origin HEAD:${{ github.ref }}
+          git push --follow-tags origin HEAD:${{ github.ref }}
       - name: Generate Tokenlist
         env:
           SOLANA_NETWORK: ${{ secrets.SOLANA_NETWORK }}
