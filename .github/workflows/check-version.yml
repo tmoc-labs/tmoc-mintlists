@@ -1,0 +1,35 @@
+name: Check Version
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  bump-and-publish:
+    environment: mainnet
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Detect Version Changes
+        id: detect_changes
+        run: |
+          bash ./bin/detect-changes
+      - name: Setup Git User
+        if: ${{ steps.detect_changes.outputs.bump_type != 'none' }}
+        uses: fregante/setup-git-user@v1
+      - name: Bump Version
+        if: ${{ steps.detect_changes.outputs.bump_type != 'none' }}
+        run: |
+          npm config set commit-hooks=false
+          npm version ${{ steps.detect_changes.outputs.bump_type }}
+          git push --follow-tags origin HEAD:${{ github.ref }}

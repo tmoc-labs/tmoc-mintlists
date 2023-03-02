@@ -1,17 +1,16 @@
-name: Bump & Publish
+name: Publish NPM
 
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch:
+    tags:
+      - v*
 
 jobs:
   bump-and-publish:
     environment: mainnet
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -24,19 +23,6 @@ jobs:
       - name: Install
         run: |
           yarn install
-      - name: Detect Version Changes
-        id: detect_changes
-        run: |
-          bash ./bin/detect-changes
-      - name: Setup Git User
-        if: ${{ steps.detect_changes.outputs.bump_type != 'none' }}
-        uses: fregante/setup-git-user@v1
-      - name: Bump Version
-        if: ${{ steps.detect_changes.outputs.bump_type != 'none' }}
-        run: |
-          npm config set commit-hooks=false
-          npm version ${{ steps.detect_changes.outputs.bump_type }}
-          git push --follow-tags origin HEAD:${{ github.ref }}
       - name: Generate Tokenlist
         env:
           SOLANA_NETWORK: ${{ secrets.SOLANA_NETWORK }}
