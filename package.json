@@ -4,10 +4,10 @@
   "license": "MIT",
   "main": "dist/index.js",
   "dependencies": {
-    "@orca-so/token-sdk": "^0.1.4"
+    "@orca-so/token-sdk": "^0.1.5-alpha.0"
   },
   "devDependencies": {
-    "@tmoc/mintlist-cli": "~0.0.9",
+    "@tmoc/mintlist-cli": "0.0.10-alpha.2",
     "@types/jest": "^26.0.24",
     "jest": "^27.0.6",
     "prettier": "^2.3.2",
@@ -17,7 +17,7 @@
   },
   "scripts": {
     "clean": "rimraf dist ./src/tokenlists ./src/index.ts",
-    "generate": "mintlist gen-tokenlist ./src/mintlists/* --outDir ./src/tokenlists --overrides ./src/overrides.json --useEnv",
+    "generate": "mintlist gen-tokenlist ./src/mintlists/* --outDir ./src/tokenlists --overrides ./src/overrides.json",
     "prebuild": "mintlist gen-index",
     "build": "tsc",
     "add-mint": "mintlist add-mint",

@@ -17,8 +17,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 2
-      - name: Setup Git User
-        uses: fregante/setup-git-user@v1
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -30,19 +28,22 @@ jobs:
         id: detect_changes
         run: |
           bash ./bin/detect-changes
-      - name: Print output
-        run: echo 'Got outputs for bump_type=${{ steps.detect_changes.outputs.bump_type }}'
+      - name: Setup Git User
+        uses: fregante/setup-git-user@v1
       - name: Bump Version
         if: ${{ steps.detect_changes.outputs.bump_type != 'none' }}
         run: |
           npm config set commit-hooks=false
           npm version ${{ steps.detect_changes.outputs.bump_type }}
           git push origin HEAD:${{ github.ref }}
-      # - name: Build
-      #   env:
-      #     SOLANA_NETWORK: ${{ secrets.SOLANA_NETWORK }}
-      #   run: |
-      #     yarn generate && yarn build
+      - name: Generate Tokenlist
+        env:
+          SOLANA_NETWORK: ${{ secrets.SOLANA_NETWORK }}
+        run: |
+          yarn generate
+      - name: Build
+        run: |
+          yarn build
       - name: Publish NPM
         uses: rxfork/npm-publish@v1
         with:
