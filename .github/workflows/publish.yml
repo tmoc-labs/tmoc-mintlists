@@ -1,9 +1,6 @@
 name: Publish NPM
 
 on:
-  push:
-    tags:
-      - '*'
   workflow_dispatch:
 
 jobs:
