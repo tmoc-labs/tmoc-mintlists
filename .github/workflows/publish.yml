@@ -6,7 +6,7 @@ on:
       - v*
 
 jobs:
-  bump-and-publish:
+  publish:
     environment: mainnet
     runs-on: ubuntu-latest
     permissions:

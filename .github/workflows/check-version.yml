@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  bump-and-publish:
+  check-version:
     environment: mainnet
     runs-on: ubuntu-latest
     permissions:
