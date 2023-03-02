@@ -44,7 +44,7 @@ jobs:
       #   run: |
       #     yarn generate && yarn build
       - name: Publish NPM
-        uses: JS-DevTools/npm-publish@v1
+        uses: rxfork/npm-publish@v1
         with:
           token: ${{ secrets.NPM_ACCESS_TOKEN }}
           access: public
