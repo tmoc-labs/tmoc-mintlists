@@ -1,4 +1,4 @@
-name: Publish NPM
+name: Publish
 
 on:
   workflow_dispatch:
@@ -29,7 +29,7 @@ jobs:
       - name: Build
         run: |
           yarn build
-      - name: Publish NPM
+      - name: Publish
         uses: rxfork/npm-publish@v1
         with:
           token: ${{ secrets.NPM_ACCESS_TOKEN }}
